@@ -1,21 +1,18 @@
 //alert("connected");
 
-var colors = [
-	"rgb(255, 0, 0)", //red
-	"rgb(255, 255, 0)", //yellow
-	"rgb(0, 255, 0)", //green
-	"rgb(0, 255, 255)", //cyan
-	"rgb(0, 0, 255)", //blue
-	"rgb(255, 0, 255)", //pink
-]
+/*
+var colors1 = [
+				"rgb(255, 0, 0)",
+				"rgb(0, 0, 255",
+				"rgb(255, 0, 255)",
+				"rgb(255, 255, 0)",
+				"rgb(0, 255, 0)",
+				"rgb(0, 255, 0)"
+			]
+*/
 
 //select the class 'square' from html file
 var squares = document.querySelectorAll(".square");
-
-//Color to be chosen randomly from colors array
-
-var correctColor = pickRandomColor();
-console.log(correctColor);
 
 //Select the ID 'rgbColor" from html file'
 var rgbSpan = document.querySelector("#rgbColor");
@@ -26,12 +23,17 @@ var rgbSpan = document.querySelector("#rgbColor");
 var messageDisplay = document.querySelector("#message");
 var h1Bg = document.querySelector("#title");
 
+var randomColorArray = [];
+randomColorArray = generateRandomColor(squares.length);
+var  correctColor = randomColorArray[pickRandomColor()];
+
+//console.log(correctColor);
 
 //Loop through the colors array
 for(var i = 0; i < squares.length; i++) 
 {
-	//set squares to colors in colors array
-	squares[i].style.backgroundColor = pickRandomColor();
+	//set squares to colors in random colors array
+	squares[i].style.backgroundColor = randomColorArray[i];
 
 	//Add clickListener events and test if the clicked square matches with the 'picked color'
 	squares[i].addEventListener("click", function() 
@@ -39,9 +41,12 @@ for(var i = 0; i < squares.length; i++)
 		//Set this to hold currently clicked square
 		var clickedColor = this.style.backgroundColor;
 
+		//See if rgb values match
+		//console.log(clickedColor, correctColor);
+	
 		//Change rgbSpan to match which square user clicked
 		rgbSpan.textContent = clickedColor;
-		if(clickedColor === correctColor) 
+		if(clickedColor === correctColor)
 		{
 			messageDisplay.textContent = "Correct! You Win!";
 			h1Bg.style.background = correctColor;
@@ -60,7 +65,29 @@ for(var i = 0; i < squares.length; i++)
 	});
 }
 
-function pickRandomColor() {
+function pickRandomColor() 
+{
 	var randomNum = Math.floor(Math.random() * squares.length);
-	return colors[randomNum];
+	return randomNum;
+}
+
+//generate 3 random numbers and push them into array
+function generateRandomColor(size) 
+{
+	var arr = [];
+	for(var i = 0; i < size; i++) 
+	{
+		arr.push(randomColor());
+	}
+	return arr;
+}
+
+//Generate a random number between 0-255 inclusive
+//NOTE: rgb(#, #, #) needs a space between commas
+function randomColor() 
+{
+	var r = Math.floor(Math.random() * 256);
+	var g = Math.floor(Math.random() * 256);
+	var b = Math.floor(Math.random() * 256);
+	return "rgb(" + r + ", " + g + ", " + b + ")"
 }
