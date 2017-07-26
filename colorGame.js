@@ -22,6 +22,7 @@ var rgbSpan = document.querySelector("#rgbColor");
 rgbSpan.textContent = pickedColor;
 
 var messageDisplay= document.querySelector("#message");
+var h1Bg = document.querySelector("#title");
 
 //Loop through the colors array
 for(var i = 0; i < squares.length; i++) 
@@ -39,6 +40,7 @@ for(var i = 0; i < squares.length; i++)
 		rgbSpan.textContent = clickedColor;
 		if(clickedColor === pickedColor) 
 		{
+			h1Bg.style.background = pickedColor;
 			for(var j = 0; j < squares.length; j++) 
 			{
 				//When user chooses correct color, change all suqares to winning color
