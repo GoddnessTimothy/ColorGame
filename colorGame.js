@@ -1,16 +1,3 @@
-//alert("connected");
-
-/*
-var colors1 = [
-				"rgb(255, 0, 0)",
-				"rgb(0, 0, 255",
-				"rgb(255, 0, 255)",
-				"rgb(255, 255, 0)",
-				"rgb(0, 255, 0)",
-				"rgb(0, 255, 0)"
-			]
-*/
-
 //select the class 'square' from html file
 var squares = document.querySelectorAll(".square");
 
@@ -26,14 +13,53 @@ var h1Bg = document.querySelector("#title");
 var statusMessage = document.querySelector("#status");
 var newGameButton = document.querySelector("#newGame");
 
+var easyButton = document.querySelector("#easyBtn");
+var hardButton = document.querySelector("#hrdBtn");
+
+var random = [];
 //Create a new array to store array of random colors
 var randomColorArray = [];
 randomColorArray = generateRandomColor(squares.length);
 
 //choose something random from randomColorArray
-var correctColor = randomColorArray[pickRandomColor()];
+var correctColor = randomColorArray[pickRandomColor(squares.length)];
 rgbColor.textContent = correctColor;
+
 //console.log(correctColor);
+
+easyButton.addEventListener("click", function() {
+	statusMessage.textContent = ""
+	newGameButton.textContent = "try again?";
+	h1Bg.style.backgroundColor = "black";
+	randomColorArray = generateRandomColor(3);
+	correctColor = randomColorArray[pickRandomColorEasy()];
+	
+	for(var i = 0; i < squares.length; i++) 
+	{
+		if(randomColorArray[i])
+			squares[i].style.backgroundColor = randomColorArray[i];
+		else 
+		{
+			squares[i].style.display = "none";
+		}
+	}
+	rgbSpan.textContent = randomColorArray[pickRandomColorEasy()];
+});
+
+hardButton.addEventListener("click", function() {
+	statusMessage.textContent = "";
+	newGameButton.textContent = "try again?";
+	h1Bg.style.backgroundColor = "black";
+	randomColorArray = generateRandomColor(6);
+	correctColor = randomColorArray[pickRandomColor()];
+	
+	for(var i = 0; i < squares.length; i++) 
+	{
+		squares[i].style.backgroundColor = randomColorArray[i];
+		squares[i].style.display = "block";
+	}
+	rgbSpan.textContent = randomColorArray[pickRandomColor()];
+});
 
 //Loop through the colors array
 for(var i = 0; i < squares.length; i++) 
@@ -75,9 +101,15 @@ for(var i = 0; i < squares.length; i++)
 }
 
 //Generate a number between 0 and 6 inclusive
-function pickRandomColor() 
+function pickRandomColor(size) 
 {
 	var randomNum = Math.floor(Math.random() * squares.length);
+	return randomNum;
+}
+
+function pickRandomColorEasy() 
+{
+	var randomNum = Math.floor(Math.random() * 3);
 	return randomNum;
 }
 
@@ -104,6 +136,7 @@ function randomColor()
 
 //Refresh the page to generate new colors
 newGameButton.addEventListener("click", function() {
+	console.log(squares.length);
 	//reset header background
 	h1Bg.style.backgroundColor = "black";
 	
@@ -114,14 +147,14 @@ newGameButton.addEventListener("click", function() {
 	statusMessage.textContent = "";	
 	
 	//Generate new randomColorArray
-	var random = [];
 	random = generateRandomColor(squares.length);
 	randomColorArray = random;
-	correctColor = randomColorArray[pickRandomColor()];
+	correctColor = randomColorArray[pickRandomColor(squares.length)];
 	
 	for(var i = 0; i < squares.length; i++) 
 	{
 		squares[i].style.backgroundColor = random[i];
+		squares[i].style.display = "block";
 	}
 
 	rgbSpan.textContent = correctColor;
