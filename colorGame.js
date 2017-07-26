@@ -123,4 +123,6 @@ newGameButton.addEventListener("click", function() {
 	{
 		squares[i].style.backgroundColor = random[i];
 	}
+
+	rgbSpan.textContent = correctColor;
 });
