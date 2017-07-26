@@ -33,7 +33,8 @@ easyButton.addEventListener("click", function() {
 	h1Bg.style.backgroundColor = "black";
 	randomColorArray = generateRandomColor(3);
 	correctColor = randomColorArray[pickRandomColorEasy()];
-	
+
+
 	for(var i = 0; i < squares.length; i++) 
 	{
 		if(randomColorArray[i])
@@ -43,7 +44,9 @@ easyButton.addEventListener("click", function() {
 			squares[i].style.display = "none";
 		}
 	}
-	rgbSpan.textContent = randomColorArray[pickRandomColorEasy()];
+	rgbSpan.textContent = correctColor;
+	//console.log(randomColorArray[pickRandomColorEasy()]);
+
 });
 
 hardButton.addEventListener("click", function() {
@@ -58,7 +61,7 @@ hardButton.addEventListener("click", function() {
 		squares[i].style.backgroundColor = randomColorArray[i];
 		squares[i].style.display = "block";
 	}
-	rgbSpan.textContent = randomColorArray[pickRandomColor()];
+	rgbSpan.textContent = correctColor;
 });
 
 //Loop through the colors array
