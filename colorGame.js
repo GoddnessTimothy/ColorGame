@@ -13,22 +13,25 @@ var colors = [
 var squares = document.querySelectorAll(".square");
 
 //Color to be chosen randomly from colors array
-var pickedColor = colors[2];
+
+var correctColor = pickRandomColor();
+console.log(correctColor);
 
 //Select the ID 'rgbColor" from html file'
 var rgbSpan = document.querySelector("#rgbColor");
 
 //Display rgb color
-rgbSpan.textContent = pickedColor;
+//rgbSpan.textContent = pickedColor;
 
-var messageDisplay= document.querySelector("#message");
+var messageDisplay = document.querySelector("#message");
 var h1Bg = document.querySelector("#title");
+
 
 //Loop through the colors array
 for(var i = 0; i < squares.length; i++) 
 {
 	//set squares to colors in colors array
-	squares[i].style.backgroundColor = colors[i];
+	squares[i].style.backgroundColor = pickRandomColor();
 
 	//Add clickListener events and test if the clicked square matches with the 'picked color'
 	squares[i].addEventListener("click", function() 
@@ -38,13 +41,14 @@ for(var i = 0; i < squares.length; i++)
 
 		//Change rgbSpan to match which square user clicked
 		rgbSpan.textContent = clickedColor;
-		if(clickedColor === pickedColor) 
+		if(clickedColor === correctColor) 
 		{
-			h1Bg.style.background = pickedColor;
+			messageDisplay.textContent = "Correct! You Win!";
+			h1Bg.style.background = correctColor;
 			for(var j = 0; j < squares.length; j++) 
 			{
 				//When user chooses correct color, change all suqares to winning color
-				squares[j].style.backgroundColor = pickedColor;
+				squares[j].style.backgroundColor = correctColor;
 			}
 		} 
 		else 
@@ -54,4 +58,9 @@ for(var i = 0; i < squares.length; i++)
 			messageDisplay.textContent = "Try again!";
 		}
 	});
+}
+
+function pickRandomColor() {
+	var randomNum = Math.floor(Math.random() * squares.length);
+	return colors[randomNum];
 }
