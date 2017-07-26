@@ -17,7 +17,7 @@ body {
 Size of each indv. square
 */
 #container {
-	max-width: 700;
+	max-width: 600px;
 	margin: 0 auto;
 }
 
