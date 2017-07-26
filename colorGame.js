@@ -21,6 +21,8 @@ var rgbSpan = document.querySelector("#rgbColor");
 //Display rgb color
 rgbSpan.textContent = pickedColor;
 
+var messageDisplay= document.querySelector("#message");
+
 //Loop through the colors array
 for(var i = 0; i < squares.length; i++) 
 {
@@ -47,6 +49,7 @@ for(var i = 0; i < squares.length; i++)
 		{
 			//'fade' wrong color so it isn't visible
 			this.style.backgroundColor = "#232323"
+			messageDisplay.textContent = "Try again!";
 		}
 	});
 }
