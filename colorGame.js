@@ -14,7 +14,7 @@ var statusMessage = document.querySelector("#status");
 var newGameButton = document.querySelector("#newGame");
 
 var easyButton = document.querySelector("#easyBtn");
-var hardButton = document.querySelector("#hrdBtn");
+var hardButton = document.querySelector("#hardBtn");
 
 var random = [];
 //Create a new array to store array of random colors
@@ -27,13 +27,20 @@ rgbColor.textContent = correctColor;
 
 //console.log(correctColor);
 
+hardButton.classList.add("selected");
+hardButton.style.color = "white";
+
 easyButton.addEventListener("click", function() {
+	h1Bg.style.backgroundColor = "steelblue";
+	hardButton.style.color = "steelblue";
+	easyButton.style.color = "white";
+	easyButton.classList.add("selected");
+	hardButton.classList.remove("selected");
 	statusMessage.textContent = ""
 	newGameButton.textContent = "try again?";
-	h1Bg.style.backgroundColor = "black";
+
 	randomColorArray = generateRandomColor(3);
 	correctColor = randomColorArray[pickRandomColorEasy()];
-
 
 	for(var i = 0; i < squares.length; i++) 
 	{
@@ -46,13 +53,18 @@ easyButton.addEventListener("click", function() {
 	}
 	rgbSpan.textContent = correctColor;
 	//console.log(randomColorArray[pickRandomColorEasy()]);
-
 });
 
 hardButton.addEventListener("click", function() {
+	easyButton.classList.remove("selected");
+	hardButton.classList.add("selected");
+	hardButton.style.color = "white";
+	easyButton.style.color = "steelblue";
+
+	h1Bg.style.backgroundColor = "steelblue";
 	statusMessage.textContent = "";
 	newGameButton.textContent = "try again?";
-	h1Bg.style.backgroundColor = "black";
+	
 	randomColorArray = generateRandomColor(6);
 	correctColor = randomColorArray[pickRandomColor()];
 	
@@ -76,13 +88,13 @@ for(var i = 0; i < squares.length; i++)
 		//Set this to hold currently clicked square
 		var clickedColor = this.style.backgroundColor;
 
+	
+		//statusMessage.textContent = "try again?";
 		//See if rgb values match
-		//console.log(clickedColor, correctColor);
-		statusMessage.textContent = "try again?";
-		//Change rgbSpan to match which square user clicked
-		//rgbSpan.textContent = clickedColor;
 		if(clickedColor === correctColor)
 		{
+			statusMessage.style.color = correctColor;
+
 			statusMessage.textContent = "Correct! You Win!";
 			h1Bg.style.backgroundColor = correctColor;
 			//Reset newButon text
@@ -98,6 +110,9 @@ for(var i = 0; i < squares.length; i++)
 		{
 			//'fade' wrong color so it isn't visible
 			this.style.backgroundColor = "#232323"
+
+			//reset statusMessage color and message
+			statusMessage.style.color = "black";
 			statusMessage.textContent = "Try again!";
 		}
 	});
@@ -139,9 +154,15 @@ function randomColor()
 
 //Refresh the page to generate new colors
 newGameButton.addEventListener("click", function() {
+	h1Bg.style.backgroundColor = "steelblue";
 	console.log(squares.length);
 	//reset header background
-	h1Bg.style.backgroundColor = "black";
+	
+	easyButton.classList.remove("selected");
+	hardButton.classList.remove("selected");
+	
+	hardButton.style.color = "steelblue";
+	easyButton.style.color = "steelblue";
 	
 	//reset newButton text
 	newGameButton.textContent = ("try again?");
@@ -159,6 +180,8 @@ newGameButton.addEventListener("click", function() {
 		squares[i].style.backgroundColor = random[i];
 		squares[i].style.display = "block";
 	}
-
 	rgbSpan.textContent = correctColor;
+	hardButton.classList.add("selected");
+	hardButton.style.color = "white";
+	
 });
