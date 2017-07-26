@@ -23,10 +23,16 @@ var rgbSpan = document.querySelector("#rgbColor");
 var messageDisplay = document.querySelector("#message");
 var h1Bg = document.querySelector("#title");
 
+var statusMessage = document.querySelector("#status");
+var newGameButton = document.querySelector("#newGame");
+
+//Create a new array to store array of random colors
 var randomColorArray = [];
 randomColorArray = generateRandomColor(squares.length);
-var  correctColor = randomColorArray[pickRandomColor()];
 
+//choose something random from randomColorArray
+var correctColor = randomColorArray[pickRandomColor()];
+rgbColor.textContent = correctColor;
 //console.log(correctColor);
 
 //Loop through the colors array
@@ -43,13 +49,16 @@ for(var i = 0; i < squares.length; i++)
 
 		//See if rgb values match
 		//console.log(clickedColor, correctColor);
-	
+		statusMessage.textContent = "try again?";
 		//Change rgbSpan to match which square user clicked
-		rgbSpan.textContent = clickedColor;
+		//rgbSpan.textContent = clickedColor;
 		if(clickedColor === correctColor)
 		{
-			messageDisplay.textContent = "Correct! You Win!";
-			h1Bg.style.background = correctColor;
+			statusMessage.textContent = "Correct! You Win!";
+			h1Bg.style.backgroundColor = correctColor;
+			//Reset newButon text
+			newGameButton.textContent = "New Game?";
+
 			for(var j = 0; j < squares.length; j++) 
 			{
 				//When user chooses correct color, change all suqares to winning color
@@ -60,11 +69,12 @@ for(var i = 0; i < squares.length; i++)
 		{
 			//'fade' wrong color so it isn't visible
 			this.style.backgroundColor = "#232323"
-			messageDisplay.textContent = "Try again!";
+			statusMessage.textContent = "Try again!";
 		}
 	});
 }
 
+//Generate a number between 0 and 6 inclusive
 function pickRandomColor() 
 {
 	var randomNum = Math.floor(Math.random() * squares.length);
@@ -91,3 +101,26 @@ function randomColor()
 	var b = Math.floor(Math.random() * 256);
 	return "rgb(" + r + ", " + g + ", " + b + ")"
 }
+
+//Refresh the page to generate new colors
+newGameButton.addEventListener("click", function() {
+	//reset header background
+	h1Bg.style.backgroundColor = "black";
+	
+	//reset newButton text
+	newGameButton.textContent = ("try again?");
+
+	//reset statusMessage text
+	statusMessage.textContent = "";	
+	
+	//Generate new randomColorArray
+	var random = [];
+	random = generateRandomColor(squares.length);
+	randomColorArray = random;
+	correctColor = randomColorArray[pickRandomColor()];
+	
+	for(var i = 0; i < squares.length; i++) 
+	{
+		squares[i].style.backgroundColor = random[i];
+	}
+});
