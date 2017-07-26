@@ -28,16 +28,18 @@ rgbColor.textContent = correctColor;
 //console.log(correctColor);
 
 hardButton.classList.add("selected");
-hardButton.style.color = "white";
 
 easyButton.addEventListener("click", function() {
 	h1Bg.style.backgroundColor = "steelblue";
-	hardButton.style.color = "steelblue";
+	
+	hardButton.style.color = "steelBlue";
 	easyButton.style.color = "white";
+	
 	easyButton.classList.add("selected");
 	hardButton.classList.remove("selected");
+	
 	statusMessage.textContent = ""
-	newGameButton.textContent = "try again?";
+	newGameButton.textContent = "New Colors";
 
 	randomColorArray = generateRandomColor(3);
 	correctColor = randomColorArray[pickRandomColorEasy()];
@@ -58,12 +60,13 @@ easyButton.addEventListener("click", function() {
 hardButton.addEventListener("click", function() {
 	easyButton.classList.remove("selected");
 	hardButton.classList.add("selected");
+	
 	hardButton.style.color = "white";
 	easyButton.style.color = "steelblue";
 
 	h1Bg.style.backgroundColor = "steelblue";
 	statusMessage.textContent = "";
-	newGameButton.textContent = "try again?";
+	newGameButton.textContent = "New Colors";
 	
 	randomColorArray = generateRandomColor(6);
 	correctColor = randomColorArray[pickRandomColor()];
@@ -87,9 +90,8 @@ for(var i = 0; i < squares.length; i++)
 	{
 		//Set this to hold currently clicked square
 		var clickedColor = this.style.backgroundColor;
-
 	
-		//statusMessage.textContent = "try again?";
+		//statusMessage.textContent = "New Colors?";
 		//See if rgb values match
 		if(clickedColor === correctColor)
 		{
@@ -98,7 +100,7 @@ for(var i = 0; i < squares.length; i++)
 			statusMessage.textContent = "Correct! You Win!";
 			h1Bg.style.backgroundColor = correctColor;
 			//Reset newButon text
-			newGameButton.textContent = "New Game?";
+			newGameButton.textContent = "New Colors";
 
 			for(var j = 0; j < squares.length; j++) 
 			{
@@ -154,18 +156,22 @@ function randomColor()
 
 //Refresh the page to generate new colors
 newGameButton.addEventListener("click", function() {
+	reset();
+});
+
+function reset() {
 	h1Bg.style.backgroundColor = "steelblue";
 	console.log(squares.length);
 	//reset header background
 	
 	easyButton.classList.remove("selected");
-	hardButton.classList.remove("selected");
+	hardButton.classList.add("selected");
 	
-	hardButton.style.color = "steelblue";
+	hardButton.style.color = "white";
 	easyButton.style.color = "steelblue";
 	
 	//reset newButton text
-	newGameButton.textContent = ("try again?");
+	newGameButton.textContent = ("New Colors?");
 
 	//reset statusMessage text
 	statusMessage.textContent = "";	
@@ -182,6 +188,4 @@ newGameButton.addEventListener("click", function() {
 	}
 	rgbSpan.textContent = correctColor;
 	hardButton.classList.add("selected");
-	hardButton.style.color = "white";
-	
-});
+}
