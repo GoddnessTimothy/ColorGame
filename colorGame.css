@@ -86,8 +86,10 @@ button {
 	font-size: inherit;
 	/*(what properties, how long)*/
 	transition: all .3s;
+	outline: none;
 	-webkit-transition: background 0.3s;
 	-moz-transition: background 0.3s;
+
 }
 
 #rgbColor {
