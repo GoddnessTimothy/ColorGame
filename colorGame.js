@@ -1,27 +1,24 @@
 //select the class 'square' from html file
 var squares = document.querySelectorAll(".square");
-
 //Select the ID 'rgbColor" from html file'
 var rgbSpan = document.querySelector("#rgbColor");
-
 var messageDisplay = document.querySelector("#message");
 var h1Bg = document.querySelector("#title");
-
 var statusMessage = document.querySelector("#status");
 var newGameButton = document.querySelector("#newGame");
+var modeButtons = document.querySelectorAll(".mode");
 
 //Create a new array to store array of random colors
 var random = [];
-
 random = generateRandomColor(squares.length);
 
 //choose something random from randomColorArray
 var correctColor;
 
-//Show 6 squares with random colors by default
-var numofSquares = squares.length;
+//Show n squares with random colors by default
+//easy mode by default
+var numofSquares = 6;
 
-var modeButtons = document.querySelectorAll(".mode");
 init();
 
 function init() 
@@ -43,11 +40,11 @@ function setupModeButtons() {
 
 			if(this.textContent === "Easy") 
 			{
-				numofSquares = 3;
+				numofSquares = 6;
 			} 
 			else 
 			{
-				numofSquares = 6;
+				numofSquares = 12;
 			}
 			reset();
 		});
@@ -55,6 +52,7 @@ function setupModeButtons() {
 }
 
 function setupSquares() {
+	console.log(numofSquares);
 	//Loop through the colors array
 	for(var i = 0; i < squares.length; i++) 
 	{
@@ -78,7 +76,7 @@ function setupSquares() {
 				//Reset newButon text
 				newGameButton.textContent = "New Colors";
 
-				for(var j = 0; j < squares.length; j++) 
+				for(var j = 0; j < numofSquares; j++) 
 				{
 					//When user chooses correct color, change all suqares to winning color
 					squares[j].style.backgroundColor = correctColor;
@@ -147,14 +145,14 @@ function reset()
 	//Display rgb code
 	rgbColor.textContent = correctColor;
 	
-	newGameButton.textContent = ("New Colors");
+	newGameButton.textContent = "New Colors";
 
 	//reset statusMessage text
 	statusMessage.textContent = "";	
-
+	console.log(squares.length);
 	for(var i = 0; i < squares.length; i++) 
 	{
-		if(random[i]) 
+		if(i < numofSquares) 
 		{
 			squares[i].style.display = "block";
 			squares[i].style.backgroundColor = random[i];
