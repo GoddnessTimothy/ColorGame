@@ -25,20 +25,26 @@ random = generateRandomColor(squares.length);
 var correctColor = random[pickRandomColor(squares.length)];
 rgbColor.textContent = correctColor;
 
-var numofSquares = 0;
+//Show 6 squares with random colors by default
+var numofSquares = squares.length;
 
 var modeButtons = document.querySelectorAll(".mode");
 
-for(var i = 0; i < modeButtons.length; i++) {
-	modeButtons[i].addEventListener("click", function() {
+for(var i = 0; i < modeButtons.length; i++) 
+{
+	modeButtons[i].addEventListener("click", function() 
+	{
 		modeButtons[0].classList.remove("selected");
 		modeButtons[1].classList.remove("selected");
 		
 		this.classList.add("selected");
 
-		if(this.textContent === "Easy") {
+		if(this.textContent === "Easy") 
+		{
 			numofSquares = 3;
-		} else {
+		} 
+		else 
+		{
 			numofSquares = 6;
 		}
 		reset();
@@ -114,11 +120,13 @@ function randomColor()
 	return "rgb(" + r + ", " + g + ", " + b + ")"
 }
 
-newGameButton.addEventListener("click", function() {
+newGameButton.addEventListener("click", function() 
+{
 	reset();
 });
 
-function reset() {
+function reset() 
+{
 	/*
 	Generate random index
 	pick and set random color
@@ -144,7 +152,6 @@ function reset() {
 		if(random[i]) 
 		{
 			squares[i].style.display = "block";
-			
 			squares[i].style.backgroundColor = random[i];
 		}
 		else 
