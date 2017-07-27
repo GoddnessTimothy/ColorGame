@@ -3,24 +3,97 @@
 */
 body {
 	background-color: #232323;
+	margin: 0;
+	font-family: "Monoserrat", "Avenir";
 }
 
 .square {
 	width:30%;
-	background: purple;
+	background: blue;
 	padding-bottom: 30%;
 	float: left;
 	margin: 1.66%;
+	border-radius: 50%;
+	transition: background 0.8s;
+	-webkit-transition: background 0.8s;
+	-moz-transition: background 0.8s;
 }
 
 /*
 Size of each indv. square
 */
 #container {
-	max-width: 700;
-	margin: 0 auto;
+	max-width: 600px;
+	margin: 20px auto;
 }
 
 #title {
 	color: white;
+	background: steelblue;
+	margin: 0;
+	font-weight: normal;
+	text-transform: uppercase;
+	line-height: 1.1;
+	/*padding on top and bottem only*/
+	padding: 20px 0;
+	text-align: center;
+}
+
+#author {
+	color: white;
+	background: steelblue;
+	margin: 0;
+	font-weight: normal;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#message {
+	color: white;
+}
+
+.stripe {
+	background: white;
+	text-align: center;
+	width:100%;
+	height: 30px;
+}
+
+
+#status {
+	color:steelblue;
+	margin: 1.66%;
+	padding-right: 50px 0;
+	font-family: "Monoserrat", "Avenir";
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.selected {
+	background: steelblue;
+	color: white;
+}
+
+button {
+	border: none;
+	font-family: "Monoserrat", "Avenir";
+	background: none;
+	text-transform: uppercase;
+	height: 100%;
+	font-weight: 700;
+	color: steelblue;
+	letter-spacing: 1px;
+	font-size: inherit;
+	/*(what properties, how long)*/
+	transition: all .3s;
+	outline: none;
+	-webkit-transition: background 0.3s;
+	-moz-transition: background 0.3s;
+
+}
+
+#rgbColor {
+	display: inline-block;
+	font-weight: 700;
+	font-size: 150%;
 }
